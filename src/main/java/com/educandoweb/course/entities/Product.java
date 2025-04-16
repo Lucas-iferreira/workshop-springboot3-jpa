@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "tb_product")
 public class Product implements Serializable {
     @Serial
-    private static final long serialVersionUID= 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,7 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
+
 
     public Product() {
     }
@@ -81,17 +82,18 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
     @JsonIgnore
     public Set<Order> getOrders(){
-        Set<Order> set = new HashSet<>();
+        Set<Order> set=new HashSet<>();
         for(OrderItem x: items){
             set.add(x.getOrder());
         }
         return set;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
     }
 
     @Override
