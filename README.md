@@ -15,7 +15,7 @@ Este projeto é uma aplicação backend construída com Java 17, Spring Boot 3 e
 - Tratar exceções de forma adequada
 
 ## Modelo conceitual
-![Modelo Conceitual](https://github.com/Lucas-iferreira/workshop-springboot3-jpa/blob/main/assets/modelo-conceitual.jpeg)
+![Modelo Conceitual](assets/modelo-conceitual.jpeg)
 
 # Tecnologias utilizadas
 - Java
