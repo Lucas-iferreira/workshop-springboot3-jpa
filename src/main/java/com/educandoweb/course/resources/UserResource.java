@@ -4,11 +4,11 @@ import com.educandoweb.course.entities.User;
 import com.educandoweb.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,9 +25,18 @@ public class UserResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") long id){
-        User user= userService.findById(id);
+    public ResponseEntity<User> findById(@PathVariable("id") long id) {
+        User user = userService.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    @PostMapping
+    public ResponseEntity<User> insert(@RequestBody User obj) {
+        obj = userService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+                .buildAndExpand(obj.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(obj);
     }
 
 }
