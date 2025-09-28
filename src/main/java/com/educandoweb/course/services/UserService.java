@@ -25,10 +25,19 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User insert(User obj){
+    public User insert(User obj) {
         return userRepository.save(obj);
     }
-    public void delete(long id){
+
+    public void delete(long id) {
         userRepository.deleteById(id);
+    }
+
+    public User update(long id, User obj) {
+        User user = userRepository.getReferenceById(id);
+        obj.setName(user.getName());
+        obj.setEmail(user.getEmail());
+        obj.setPhone(user.getPhone());
+        return userRepository.save(user);
     }
 }
